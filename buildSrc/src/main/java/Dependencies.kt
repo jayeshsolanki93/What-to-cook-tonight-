@@ -10,7 +10,9 @@ private object Versions {
     const val constraint_layout = "1.1.3"
     const val recyclerview = "1.0.0"
 
-    const val androidx_lifecycle = "2.2.0-alpha05"
+    const val legacy_support_v4 = "1.0.0"
+
+    const val androidx_lifecycle = "2.2.0-rc01"
 
     const val dagger = "2.24"
     const val gson = "2.8.1"
@@ -21,6 +23,7 @@ private object Versions {
     const val timber = "4.7.1"
 
     const val junit = "4.12"
+    const val mockk = "1.9.3"
     const val espresso = "3.2.0"
 
     const val stetho = "1.5.1"
@@ -42,6 +45,9 @@ object Libs {
     const val constraint_layout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
 
+    const val legacy_support_v4 = "androidx.legacy:legacy-support-v4:${Versions.legacy_support_v4}"
+
+    const val androidx_lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.androidx_lifecycle}"
     const val androidx_lifecycle_viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidx_lifecycle}"
 
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
@@ -57,6 +63,8 @@ object Libs {
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
     const val junit = "junit:junit:${Versions.junit}"
+    const val mockk = "io.mockk:mockk:${Versions.mockk}"
+    const val kotlin_coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
     const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"

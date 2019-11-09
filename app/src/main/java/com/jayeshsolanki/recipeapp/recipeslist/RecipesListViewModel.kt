@@ -30,7 +30,6 @@ class RecipesListViewModel(
 
     fun loadRecipesList() {
         viewModelScope.launch {
-            // TODO: Show loading
             // Randomly select an ingredient.
             val recipesListResult = recipesRepository.getRecipesList(availableIngredients.random())
             if (recipesListResult is Success) {

@@ -16,10 +16,6 @@ import kotlinx.android.synthetic.main.recipeslist_fragment.*
 
 class RecipesListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RecipesListFragment()
-    }
-
     private lateinit var viewModel: RecipesListViewModel
 
     private lateinit var recipesListAdapter: RecipesListAdapter
@@ -57,5 +53,9 @@ class RecipesListFragment : Fragment() {
         viewModel.command.observe(this, Observer {
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    companion object {
+        fun newInstance() = RecipesListFragment()
     }
 }
