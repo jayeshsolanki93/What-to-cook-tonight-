@@ -38,8 +38,7 @@ dependencies {
     implementation Libs.androidx_lifecycle_viewmodel_ktx
     implementation Libs.androidx_lifecycle_extensions
 
-    implementation Libs.dagger
-    kapt Libs.dagger_compiler
+    implementation Libs.koin
     implementation Libs.gson
     implementation Libs.retrofit
     implementation Libs.retrofit_convertor_gson

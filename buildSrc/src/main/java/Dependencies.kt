@@ -14,7 +14,7 @@ private object Versions {
 
     const val androidx_lifecycle = "2.2.0-rc01"
 
-    const val dagger = "2.24"
+    const val koin = "2.0.1"
     const val gson = "2.8.1"
     const val okhttp = "4.2.0"
     const val retrofit = "2.6.2"
@@ -50,8 +50,7 @@ object Libs {
     const val androidx_lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.androidx_lifecycle}"
     const val androidx_lifecycle_viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidx_lifecycle}"
 
-    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    const val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val koin = "org.koin:koin-android-viewmodel:${Versions.koin}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"

@@ -7,17 +7,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.jayeshsolanki.recipeapp.R
-import com.jayeshsolanki.recipeapp.ViewModelFactory
-import com.jayeshsolanki.recipeapp.WhatToCookTonight
 import com.jayeshsolanki.recipeapp.data.model.Recipe
 import com.jayeshsolanki.recipeapp.tools.glide.GlideApp
 import kotlinx.android.synthetic.main.recipedetails_fragment.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class RecipeDetailsFragment : Fragment() {
 
-    private lateinit var viewModel: RecipeDetailsViewModel
+    private val viewModel: RecipeDetailsViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,9 +27,9 @@ class RecipeDetailsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this,
+        /*viewModel = ViewModelProvider(this,
                 ViewModelFactory.getInstance(context!!.applicationContext as WhatToCookTonight))
-                .get(RecipeDetailsViewModel::class.java)
+                .get(RecipeDetailsViewModel::class.java)*/
         viewModel.start(arguments!!.getString(ARG_RECIPE_ID)!!)
         viewModel.item.observe(viewLifecycleOwner, Observer {
             bindData(it)

@@ -7,17 +7,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jayeshsolanki.recipeapp.R
-import com.jayeshsolanki.recipeapp.ViewModelFactory
-import com.jayeshsolanki.recipeapp.WhatToCookTonight
 import com.jayeshsolanki.recipeapp.recipedetails.RecipeDetailsFragment
 import kotlinx.android.synthetic.main.recipeslist_fragment.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class RecipesListFragment : Fragment() {
 
-    private lateinit var viewModel: RecipesListViewModel
+    private val viewModel: RecipesListViewModel by viewModel()
 
     private lateinit var recipesListAdapter: RecipesListAdapter
 
@@ -45,9 +43,6 @@ class RecipesListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this,
-                ViewModelFactory.getInstance(context!!.applicationContext as WhatToCookTonight))
-                .get(RecipesListViewModel::class.java)
         viewModel.items.observe(viewLifecycleOwner, Observer {
             recipesListAdapter.setAdapterData(it)
         })
