@@ -27,10 +27,11 @@ class RecipeDetailsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        /*viewModel = ViewModelProvider(this,
-                ViewModelFactory.getInstance(context!!.applicationContext as WhatToCookTonight))
-                .get(RecipeDetailsViewModel::class.java)*/
         viewModel.start(arguments!!.getString(ARG_RECIPE_ID)!!)
+        initializeObservers()
+    }
+
+    private fun initializeObservers() {
         viewModel.item.observe(viewLifecycleOwner, Observer {
             bindData(it)
         })

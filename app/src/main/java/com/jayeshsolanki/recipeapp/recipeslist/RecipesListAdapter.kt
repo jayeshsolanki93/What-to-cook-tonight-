@@ -30,7 +30,6 @@ class RecipesListAdapter(
     fun setAdapterData(recipesList: List<Recipe>) {
         this.recipesList.clear()
         this.recipesList.addAll(recipesList)
-        // TODO: DiffUtil
         notifyDataSetChanged()
     }
 

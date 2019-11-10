@@ -43,6 +43,10 @@ class RecipesListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        initializeObservers()
+    }
+
+    private fun initializeObservers() {
         viewModel.items.observe(viewLifecycleOwner, Observer {
             recipesListAdapter.setAdapterData(it)
         })
