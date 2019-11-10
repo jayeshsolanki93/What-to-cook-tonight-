@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jayeshsolanki.recipeapp.data.Result.Success
 import com.jayeshsolanki.recipeapp.data.Result.Error
-import com.jayeshsolanki.recipeapp.data.model.Meal
+import com.jayeshsolanki.recipeapp.data.model.Recipe
+import com.jayeshsolanki.recipeapp.data.model.getRecipe
 import com.jayeshsolanki.recipeapp.data.source.RecipesRepository
 import com.jayeshsolanki.recipeapp.utils.BaseCommand
 import com.jayeshsolanki.recipeapp.utils.SingleLiveEvent
@@ -21,19 +22,21 @@ class RecipesListViewModel(
 
     val command: SingleLiveEvent<BaseCommand> = SingleLiveEvent()
 
-    private val _items = MutableLiveData<List<Meal>>().apply { value = emptyList() }
-    val items: LiveData<List<Meal>> = _items
+    private val _items = MutableLiveData<List<Recipe>>().apply { value = emptyList() }
+    val items: LiveData<List<Recipe>> = _items
 
     init {
         loadRecipesList()
     }
 
-    fun loadRecipesList() {
+    private fun loadRecipesList() {
         viewModelScope.launch {
             // Randomly select an ingredient.
             val recipesListResult = recipesRepository.getRecipesList(availableIngredients.random())
             if (recipesListResult is Success) {
-                _items.value = recipesListResult.data
+                val meals = recipesListResult.data
+                val recipes = meals.map { it.getRecipe() }
+                _items.value = recipes
                 command.value = BaseCommand.Success("${recipesListResult.data.size} recipes found")
             } else {
                 _items.value = emptyList()

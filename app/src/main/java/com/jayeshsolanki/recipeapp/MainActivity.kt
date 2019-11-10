@@ -1,9 +1,7 @@
 package com.jayeshsolanki.recipeapp
 
-import androidx.appcompat.app.AppCompatActivity
-
 import android.os.Bundle
-
+import androidx.appcompat.app.AppCompatActivity
 import com.jayeshsolanki.recipeapp.recipeslist.RecipesListFragment
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +16,14 @@ class MainActivity : AppCompatActivity() {
                 replace(R.id.container, recipesListFragment)
                 commit()
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStackImmediate()
+        } else {
+            super.onBackPressed()
         }
     }
 }

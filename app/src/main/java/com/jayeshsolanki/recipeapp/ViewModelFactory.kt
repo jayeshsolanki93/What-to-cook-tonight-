@@ -3,15 +3,21 @@ package com.jayeshsolanki.recipeapp
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.jayeshsolanki.recipeapp.recipedetails.RecipeDetailsViewModel
 import com.jayeshsolanki.recipeapp.recipeslist.RecipesListViewModel
 
-class ViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
+@Suppress("UNCHECKED_CAST")
+class ViewModelFactory(
+    private val application: Application
+) : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass == RecipesListViewModel::class.java) {
-            return RecipesListViewModel(Injection.provideRecipesRepository(application)) as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        val recipesRepository = Injection.provideRecipesRepository(application)
+        return when (modelClass) {
+            RecipesListViewModel::class.java -> RecipesListViewModel(recipesRepository) as T
+            RecipeDetailsViewModel::class.java -> RecipeDetailsViewModel(recipesRepository) as T
+            else -> throw IllegalArgumentException("Unknown model class $modelClass")
         }
-        throw IllegalArgumentException("Unknown model class $modelClass")
     }
 
     companion object {

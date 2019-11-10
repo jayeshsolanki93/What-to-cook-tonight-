@@ -11,4 +11,7 @@ interface MealsApi {
         @Query("i") ingredient: String,
         @Query("c") category: String = listOf("vegan", "vegetarian").random()
     ): MealsResponse
+
+    @GET("lookup.php")
+    suspend fun mealById(@Query("i") id: String): MealsResponse
 }

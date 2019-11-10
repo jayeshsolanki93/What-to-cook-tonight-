@@ -1,17 +1,18 @@
 package com.jayeshsolanki.recipeapp.recipeslist
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jayeshsolanki.recipeapp.R
 import com.jayeshsolanki.recipeapp.ViewModelFactory
 import com.jayeshsolanki.recipeapp.WhatToCookTonight
+import com.jayeshsolanki.recipeapp.recipedetails.RecipeDetailsFragment
 import kotlinx.android.synthetic.main.recipeslist_fragment.*
 
 class RecipesListFragment : Fragment() {
@@ -38,21 +39,30 @@ class RecipesListFragment : Fragment() {
             orientation = LinearLayoutManager.VERTICAL
         }
         list_recipes.layoutManager = layoutManager
-        recipesListAdapter = RecipesListAdapter { recipeId ->
-            // TODO: Start second screen with the recipe id
-        }
+        recipesListAdapter = RecipesListAdapter(::openRecipeDetails)
         list_recipes.adapter = recipesListAdapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, ViewModelFactory.getInstance(context!!.applicationContext as WhatToCookTonight)).get(RecipesListViewModel::class.java)
-        viewModel.items.observe(this, Observer {
+        viewModel = ViewModelProvider(this,
+                ViewModelFactory.getInstance(context!!.applicationContext as WhatToCookTonight))
+                .get(RecipesListViewModel::class.java)
+        viewModel.items.observe(viewLifecycleOwner, Observer {
             recipesListAdapter.setAdapterData(it)
         })
-        viewModel.command.observe(this, Observer {
+        viewModel.command.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    private fun openRecipeDetails(recipeId: String) {
+        val recipeDetailsFragment = RecipeDetailsFragment.newInstance(recipeId)
+        activity!!.supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, recipeDetailsFragment, "DetailsFragment")
+            addToBackStack("DetailsFragment")
+            commit()
+        }
     }
 
     companion object {

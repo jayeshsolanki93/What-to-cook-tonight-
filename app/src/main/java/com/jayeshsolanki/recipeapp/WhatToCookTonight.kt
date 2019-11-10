@@ -3,7 +3,7 @@ package com.jayeshsolanki.recipeapp
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.jayeshsolanki.recipeapp.data.api.MealsApi
-import com.jayeshsolanki.recipeapp.tools.DataManager
+import com.jayeshsolanki.recipeapp.tools.NetworkManager
 import timber.log.Timber
 
 class WhatToCookTonight : Application() {
@@ -24,7 +24,7 @@ class WhatToCookTonight : Application() {
     }
 
     private fun initializeApi() {
-        val retrofit = DataManager.retrofit(this, BASE_API_URL)
+        val retrofit = NetworkManager.retrofit(this, BASE_API_URL)
         mealsApi = retrofit.create(MealsApi::class.java)
     }
 

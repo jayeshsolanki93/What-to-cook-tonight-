@@ -19,7 +19,12 @@ class DefaultRecipesRepository(private val mealsApi: MealsApi) : RecipesReposito
     }
 
     override suspend fun getRecipeDetails(mealId: String): Result<Meal> {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+        return try {
+            val response = mealsApi.mealById(mealId)
+            Success(response.mealsList.first())
+        } catch (e: IOException) {
+            Error(e, "Failed to complete network request")
+        }
     }
 
     companion object {

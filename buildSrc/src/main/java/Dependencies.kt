@@ -6,7 +6,7 @@ private object Versions {
 
     const val coroutines = "1.3.2"
 
-    const val appcompat = "1.0.2"
+    const val appcompat = "1.1.0-alpha04"
     const val constraint_layout = "1.1.3"
     const val recyclerview = "1.0.0"
 
