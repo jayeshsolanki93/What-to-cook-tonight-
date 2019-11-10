@@ -65,6 +65,11 @@ class RecipesListFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        list_recipes.adapter = null
+        super.onDestroyView()
+    }
+
     companion object {
         fun newInstance() = RecipesListFragment()
     }
